@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Witness - Trees of India</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4efe6;--bg2:#ede5d8;--bg3:#e4d8c4;
+  --bgc:#ffffff;--bgcs:#faf6f0;
+  --bd:rgba(80,55,25,0.1);--bd2:rgba(80,55,25,0.22);--bd3:rgba(80,55,25,0.35);
+  --tx:#1e1408;--txm:#5c4828;--txf:#9a8060;
+  --gr:#3a6a45;--gr2:#4d8a5a;--gr3:#72b080;
+  --gd:#b88830;--gd2:#cc9a38;
+  --crit:#b03518;--high:#c07028;--mod:#5a7a38;--rec:#3d8050;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --eco-bg:var(--bg);--eco-bg2:var(--bg2);--eco-accent:var(--gr);--eco-light:#c8ddc0;--eco-text:var(--tx);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;transition:background .6s;min-width:320px}
+.hidden{display:none!important}
+.sec{display:none}.sec.on{display:block}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem;background:rgba(244,239,230,0.93);backdrop-filter:blur(8px);border-bottom:.5px solid var(--bd)}
+.nav-logo{font-family:var(--serif);font-size:1.25rem;color:var(--tx);font-weight:300;letter-spacing:.05em;cursor:pointer}
+.nav-logo em{color:var(--gr2);font-style:normal}
+.nav-r{display:flex;gap:.5rem;align-items:center}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:11px;color:var(--txm);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;transition:color .2s;border-radius:4px}
+.nav-btn:hover{color:var(--tx);background:var(--bg2)}
+.nav-my-tree{background:var(--gr2);color:#fff!important;border-radius:999px;padding:.3rem .9rem!important}
+.nav-my-tree:hover{background:var(--gr)!important;background:var(--gr)!important}
+.mute-btn{border:.5px solid var(--bd2);border-radius:999px;padding:.3rem .7rem;font-size:11px;color:var(--txm);cursor:pointer;background:none;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:4px}
+.mute-btn:hover{border-color:var(--gr2);color:var(--tx)}
+
+/* LANDING */
+#s-land{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:80px;background:linear-gradient(180deg,var(--bg) 0%,var(--eco-bg,#edf5e8) 100%);transition:background .8s}
+.land-inner{display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem;width:100%;max-width:900px;margin:0 auto}
+.tree-stage{width:260px;height:330px;flex-shrink:0;position:relative}
+.cv{animation:cv-die 1.6s ease-in 4.2s forwards}
+@keyframes cv-die{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.82) translateY(10px)}}
+.cd{opacity:0;animation:cd-show .9s ease 5.6s forwards}
+@keyframes cd-show{to{opacity:.85}}
+.lf{animation-fill-mode:forwards}
+.l1{animation:lf1 1.8s ease-in 3.8s forwards}
+.l2{animation:lf2 2s ease-in 4s forwards}
+.l3{animation:lf3 1.7s ease-in 4.1s forwards}
+.l4{animation:lf4 1.9s ease-in 3.9s forwards}
+@keyframes lf1{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(-30px,120px) rotate(-50deg)}}
+@keyframes lf2{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(22px,135px) rotate(65deg)}}
+@keyframes lf3{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(-48px,100px) rotate(-28deg)}}
+@keyframes lf4{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(38px,125px) rotate(80deg)}}
+.bd{animation-fill-mode:forwards}
+.b1{animation:bf1 1.1s ease-in 4.8s forwards}
+.b2{animation:bf2 .9s ease-in 5s forwards}
+.b3{animation:bf3 1s ease-in 4.9s forwards}
+@keyframes bf1{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(-120px,-150px) scale(.5)}}
+@keyframes bf2{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(90px,-175px) scale(.5)}}
+@keyframes bf3{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(150px,-80px) scale(.5)}}
+.gp{animation:gp-wilt 1.4s ease 5.3s forwards;transform-origin:center bottom}
+@keyframes gp-wilt{0%{opacity:1;transform:scaleY(1)}100%{opacity:.3;transform:scaleY(.4)}}
+.land-text{text-align:center;opacity:0;animation:lt-in 1.6s ease 6.8s forwards;padding:0 1rem;max-width:540px;margin-top:1.5rem}
+@keyframes lt-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.land-q{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;line-height:1.3;color:var(--tx);margin-bottom:.4rem}
+.land-sub{font-size:13px;color:var(--txm);margin-bottom:2rem;line-height:1.7}
+.loc-heading{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--txf);margin-bottom:1.25rem;text-align:center}
+.loc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;width:100%;max-width:640px}
+@media(min-width:600px){.loc-grid{grid-template-columns:repeat(4,1fr)}}
+.loc-card{border:.5px solid var(--bd2);border-radius:14px;padding:1.1rem 1rem;cursor:pointer;transition:all .25s;background:var(--bgc);text-align:left;position:relative;overflow:hidden}
+.loc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:14px 14px 0 0;background:var(--lc-accent,var(--gr))}
+.loc-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(80,55,25,.1);border-color:var(--bd3)}
+.loc-card.sel{border-color:var(--lc-accent,var(--gr));background:var(--lc-bg,var(--bgcs))}
+.lc-name{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--tx);margin-bottom:.15rem}
+.lc-type{font-size:11px;color:var(--txf);line-height:1.4;margin-bottom:.5rem}
+.lc-count{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--lc-accent,var(--gr))}
+
+/* TREE LIST */
+#s-list{min-height:100vh;background:var(--eco-bg,var(--bg));transition:background .6s;padding-top:64px}
+.list-hero{padding:2.5rem 1.5rem 2rem;border-bottom:.5px solid var(--bd);background:linear-gradient(180deg,var(--eco-bg2,var(--bg2)) 0%,var(--eco-bg,var(--bg)) 100%)}
+.list-hero-inner{max-width:700px;margin:0 auto}
+.list-region{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--eco-accent,var(--gr));margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.list-back{cursor:pointer;color:var(--txf);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;font-family:var(--sans);transition:color .2s}
+.list-back:hover{color:var(--tx)}
+.list-h{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;line-height:1.2;margin-bottom:.5rem}
+.list-mood{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--txm);margin-bottom:.5rem}
+.list-label{font-size:11px;color:var(--txf);margin-bottom:0}
+.list-body{max-width:700px;margin:0 auto;padding:0 1.5rem 4rem}
+/* ── Tree photo placeholder ─────────────────────────── */
+.tree-photo{width:88px;height:80px;flex-shrink:0;border-radius:8px;overflow:hidden;border:.5px solid var(--bd2);background:var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:default}
+.tree-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tree-photo .tp-icon{font-size:22px;opacity:.35}
+.tree-photo .tp-label{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--txf);font-family:var(--sans)}
+.tree-entry{display:flex;gap:1.1rem;padding:1.4rem 0;border-bottom:.5px solid var(--bd);cursor:pointer;transition:all .2s;align-items:flex-start}
+.tree-entry:first-of-type{border-top:.5px solid var(--bd)}
+.tree-entry:hover .te-hook{color:var(--eco-accent,var(--gr2))}
+.tree-entry:hover .te-arrow{color:var(--eco-accent,var(--gr2))}
+.ub{width:3px;border-radius:999px;flex-shrink:0;margin-top:4px}
+.ub.uc{background:var(--crit)}.ub.uh{background:var(--high)}.ub.um{background:var(--mod)}.ub.ur{background:var(--rec)}
+.te-inner{flex:1}
+.te-meta{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txf);margin-bottom:.3rem}
+.te-hook{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--tx);line-height:1.35;margin-bottom:.4rem;transition:color .2s}
+.te-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--txm)}
+.ut{font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.ut.uc{color:var(--crit)}.ut.uh{color:var(--high)}.ut.um{color:var(--mod)}.ut.ur{color:var(--rec)}
+.te-arrow{color:var(--bd3);font-size:16px;margin-top:3px;flex-shrink:0;transition:color .2s}
+
+/* RIO PROFILE */
+#s-rio{min-height:100vh;background:var(--bg);padding-top:64px}
+.prof-top{padding:2.5rem 1.5rem 2rem;border-bottom:.5px solid var(--bd);background:var(--bgcs)}
+.prof-top-in{max-width:700px;margin:0 auto}
+.prof-back{background:none;border:none;font-family:var(--sans);font-size:11px;color:var(--txm);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:4px;padding:0;transition:color .2s}
+.prof-back:hover{color:var(--tx)}
+.prof-eye{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gr2);margin-bottom:.7rem}
+.prof-name{font-family:var(--serif);font-size:clamp(3rem,8vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.2rem;color:var(--tx)}
+.prof-sub{font-size:13px;color:var(--txm);margin-bottom:1.75rem;line-height:1.6}
+.vitals{display:flex;gap:2rem;flex-wrap:wrap}
+.vit-v{font-size:1.4rem;font-weight:300;color:var(--tx);line-height:1.1}
+.vit-l{font-size:10px;color:var(--txf);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+.vit-v.danger{color:var(--crit)}
+
+/* GALAXY RINGS */
+.rings-wrap-outer{padding:3rem 1.5rem;background:var(--bg);text-align:center;border-bottom:.5px solid var(--bd)}
+.rings-eye{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gr2);margin-bottom:.4rem}
+.rings-hint{font-size:12px;color:var(--txm);margin-bottom:1.75rem}
+.rings-canvas-wrap{position:relative;display:inline-block}
+#rings-cv{display:block;cursor:crosshair;border-radius:50%;border:.5px solid var(--bd)}
+.rings-leg{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+.rl-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txm)}
+.rl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* RING TOOLTIP */
+.ring-tip{position:fixed;background:var(--bgc);border:.5px solid var(--bd3);border-radius:12px;padding:1rem 1.1rem;max-width:268px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:300;text-align:left;box-shadow:0 4px 20px rgba(80,55,25,.12)}
+.ring-tip.vis{opacity:1}
+.rt-yr{font-size:10px;color:var(--gr2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem}
+.rt-title{font-family:var(--serif);font-size:1rem;margin-bottom:.25rem;color:var(--tx)}
+.rt-desc{font-size:12px;color:var(--txm);line-height:1.6}
+.rt-img{margin-top:.7rem;border-radius:8px;overflow:hidden;border:.5px solid var(--bd2)}
+.rt-img-inner{height:90px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--txf);letter-spacing:.06em;text-transform:uppercase;font-family:var(--sans)}
+.rt-ev-label{margin-top:.5rem;padding:.5rem .65rem;border-radius:6px;font-size:11px;line-height:1.5}
+.ev-fire{background:#fdf0ea;color:#8a3010;border:.5px solid #e8c0a8}
+.ev-drought{background:#fdf5e8;color:#7a5010;border:.5px solid #e8d098}
+.ev-disease{background:#edf5ea;color:#2a5820;border:.5px solid #a8d898}
+.ev-damage{background:#f2ecf8;color:#5a3080;border:.5px solid #c8a8e0}
+.ev-flood{background:#e8f0fc;color:#1a3a80;border:.5px solid #a0b8e8}
+.ev-pest{background:#fdf0e0;color:#7a4010;border:.5px solid #e0c090}
+.ev-frost{background:#eaf4fc;color:#1a5878;border:.5px solid #98cce0}
+
+/* AUDIO TIMELINE */
+.tl-section{padding:2.5rem 1.5rem;max-width:700px;margin:0 auto}
+.tl-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem}
+.tl-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--txf)}
+.tl-controls{display:flex;gap:.5rem;align-items:center}
+.tl-play-btn{background:var(--gr2);border:none;border-radius:999px;padding:.4rem 1.1rem;font-size:12px;color:#fff;cursor:pointer;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:5px;letter-spacing:.04em}
+.tl-play-btn:hover{background:var(--gr)}
+.tl-play-btn.paused{background:none;border:.5px solid var(--bd2);color:var(--txm)}
+.tl-play-btn.paused:hover{border-color:var(--gr2);color:var(--tx)}
+.tl-speed-btn{background:none;border:.5px solid var(--bd2);border-radius:999px;padding:.3rem .7rem;font-size:10px;color:var(--txf);cursor:pointer;font-family:var(--sans);letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+.tl-speed-btn:hover{border-color:var(--bd3);color:var(--txm)}
+.tl-scroll{overflow-x:auto;padding-bottom:.75rem;cursor:default}
+.tl-track{display:flex;gap:1.5px;height:52px;align-items:flex-end;min-width:580px;user-select:none}
+.tl-bar{flex:1;min-width:3px;border-radius:2px 2px 0 0;transition:opacity .08s,filter .08s;cursor:pointer;position:relative}
+.tl-bar:hover{opacity:.75}
+.tl-bar.tl-active{opacity:1;filter:brightness(1.25);box-shadow:0 0 0 2px rgba(80,55,25,.3),0 -3px 8px rgba(80,55,25,.15)}
+.tl-years-row{display:flex;min-width:580px;font-size:9px;color:var(--txf);gap:1.5px;margin-top:4px;pointer-events:none}
+.tl-yr{flex:1;text-align:center;overflow:hidden}
+.tl-now{font-size:11px;color:var(--txm);margin-top:.75rem;min-height:20px;display:flex;align-items:center;gap:7px;font-style:italic}
+.tl-now-dot{width:7px;height:7px;border-radius:50%;background:var(--gr2);display:inline-block;flex-shrink:0;animation:dot-pulse 1.2s ease infinite}
+@keyframes dot-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+
+/* VOICE */
+.voice-section{padding:3rem 1.5rem;background:var(--bgcs);border-top:.5px solid var(--bd);border-bottom:.5px solid var(--bd)}
+.voice-inner{max-width:580px;margin:0 auto}
+.v-eye{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gr2);margin-bottom:1.25rem}
+.v-text{font-family:var(--serif);font-size:clamp(1.15rem,2.8vw,1.5rem);font-weight:300;font-style:italic;line-height:1.8;color:var(--tx);margin-bottom:.75rem}
+.v-attr{font-size:11px;color:var(--txf)}
+
+/* CTA */
+.cta-section{padding:3.5rem 1.5rem;background:var(--bg);text-align:center}
+.cta-h{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.6rem);font-weight:300;margin-bottom:.5rem}
+.cta-s{font-size:13px;color:var(--txm);max-width:420px;margin:0 auto 2.5rem;line-height:1.75}
+.cta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:620px;margin:0 auto}
+.cta-card{border:.5px solid var(--bd2);border-radius:16px;padding:1.75rem 1.4rem;text-align:left;background:var(--bgc);cursor:pointer;transition:all .22s}
+.cta-card:hover{border-color:var(--gr2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(80,55,25,.1)}
+.cta-card.gold:hover{border-color:var(--gd)}
+.ci{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;font-size:16px}
+.ci-fr{background:rgba(77,138,90,.12)}
+.ci-fa{background:rgba(184,136,48,.12)}
+.cta-ct{font-family:var(--serif);font-size:1.45rem;font-weight:400;margin-bottom:.25rem;color:var(--tx)}
+.cta-cs{font-size:11px;color:var(--gr2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+.cta-cd{font-size:13px;color:var(--txm);line-height:1.7;margin-bottom:1.1rem}
+.cta-ul{list-style:none;margin-bottom:1.4rem}
+.cta-ul li{font-size:12px;color:var(--txm);padding:3px 0 3px .9rem;position:relative;line-height:1.5}
+.cta-ul li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--gr2)}
+.cta-btn{width:100%;padding:.75rem;border-radius:8px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s;font-weight:400;letter-spacing:.02em}
+.cbtn-fr{background:transparent;border:.5px solid var(--gr2);color:var(--gr2)}
+.cbtn-fr:hover{background:var(--gr2);color:#fff}
+.cbtn-fa{background:var(--gd);border:.5px solid var(--gd);color:#fff}
+.cbtn-fa:hover{background:var(--gd2)}
+
+/* DASHBOARD */
+#s-dash{min-height:100vh;background:var(--bg);padding:5rem 1.5rem 4rem}
+.dash-in{max-width:700px;margin:0 auto}
+.dash-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.5rem;border-bottom:.5px solid var(--bd);margin-bottom:2rem;flex-wrap:wrap;gap:.75rem}
+.dash-h{font-family:var(--serif);font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:300;line-height:1.2}
+.dash-h span{color:var(--gr2)}
+.dash-h span.gold{color:var(--gd)}
+.dash-badge{font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px;border:.5px solid;display:inline-block;margin-top:.4rem}
+.b-fr{border-color:var(--gr2);color:var(--gr2)}
+.b-fa{border-color:var(--gd);color:var(--gd)}
+.dash-top-r{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:540px){.dash-grid{grid-template-columns:1fr}}
+.dc{background:var(--bgc);border:.5px solid var(--bd);border-radius:12px;padding:1.2rem}
+.dc-full{grid-column:1/-1}
+.dc-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txf);margin-bottom:.9rem}
+.health-n{font-size:2rem;font-weight:300;margin-bottom:.2rem}
+.bar-w{height:5px;background:var(--bg3);border-radius:999px;overflow:hidden;margin:.5rem 0}
+.bar-f{height:100%;border-radius:999px}
+.bf-h{background:var(--high)}
+.bf-p{background:var(--gd)}
+.upd{padding:.65rem 0;border-bottom:.5px solid var(--bd)}
+.upd:last-child{border-bottom:none}
+.upd-d{font-size:10px;color:var(--txf);margin-bottom:.15rem}
+.upd-t{font-size:12px;color:var(--txm);line-height:1.6}
+.slink{display:flex;align-items:center;gap:.7rem;padding:.75rem;background:rgba(58,106,69,.06);border:.5px solid rgba(58,106,69,.18);border-radius:8px;cursor:pointer;transition:all .2s;margin-bottom:.6rem}
+.slink:hover{background:rgba(58,106,69,.12)}
+.slink-ic{width:30px;height:30px;border-radius:8px;background:rgba(58,106,69,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.slink-t{font-size:13px;color:var(--tx)}
+.slink-s{font-size:11px;color:var(--txm)}
+.rpt{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:.5px solid var(--bd);font-size:12px}
+.rpt:last-child{border-bottom:none}
+.rpt-n{color:var(--txm)}
+.rpt-dl{color:var(--gr2);cursor:pointer;font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+.go-btn{background:none;border:.5px solid var(--bd2);border-radius:999px;padding:.6rem 1.6rem;font-size:12px;color:var(--txm);cursor:pointer;font-family:var(--sans);letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
+.go-btn:hover{border-color:var(--gr2);color:var(--tx)}
+/* friend vs family specific */
+.friend-only,.family-only{display:none}
+#s-dash.role-friend .friend-only{display:block}
+#s-dash.role-family .family-only{display:block}
+#s-dash.role-friend .friend-only.dc-full{display:block}
+#s-dash.role-family .family-only.dc-full{display:block}
+.pool-my{background:rgba(184,136,48,.08);border:.5px solid rgba(184,136,48,.25);border-radius:8px;padding:.75rem;margin-top:.6rem}
+.pool-my-lbl{font-size:10px;color:var(--gd);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.2rem}
+.pool-my-val{font-size:1.1rem;font-weight:300;color:var(--tx)}
+.impact-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:.5px solid var(--bd);font-size:12px;align-items:center}
+.impact-row:last-child{border-bottom:none}
+.impact-n{color:var(--txm)}
+.impact-v{color:var(--gr2);font-weight:500}
+.witness-card{background:linear-gradient(135deg,rgba(58,106,69,.08) 0%,rgba(77,138,90,.04) 100%);border:.5px solid rgba(58,106,69,.2);border-radius:10px;padding:1rem;text-align:center}
+.wc-id{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gr2);margin-bottom:.15rem}
+.wc-lbl{font-size:11px;color:var(--txf);letter-spacing:.08em;text-transform:uppercase}
+.family-record{background:linear-gradient(135deg,rgba(184,136,48,.08) 0%,rgba(204,154,56,.04) 100%);border:.5px solid rgba(184,136,48,.22);border-radius:10px;padding:1rem}
+.fr-name{font-family:var(--serif);font-size:1rem;color:var(--gd);margin-bottom:.2rem}
+.fr-since{font-size:11px;color:var(--txf)}
+.visit-btn{width:100%;padding:.75rem;border-radius:8px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s;background:transparent;border:.5px solid var(--gr2);color:var(--gr2);display:flex;align-items:center;justify-content:center;gap:6px;margin-top:.4rem}
+.visit-btn:hover{background:var(--gr2);color:#fff}
+
+/* VISIT MODAL */
+.visit-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(30,20,8,.55);z-index:400;display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)}
+.visit-box{background:var(--bgc);border-radius:20px;width:100%;max-width:480px;max-height:86vh;overflow-y:auto;box-shadow:0 20px 60px rgba(30,20,8,.25)}
+.vm-head{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1.5rem 1rem;border-bottom:.5px solid var(--bd)}
+.vm-head-title{font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--tx)}
+.vm-close{background:none;border:none;cursor:pointer;color:var(--txf);font-size:20px;line-height:1;padding:.2rem;transition:color .2s}
+.vm-close:hover{color:var(--tx)}
+.vm-step{padding:1.4rem 1.5rem}
+.vm-step-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txf);margin-bottom:1.25rem}
+.vt-card{border:.5px solid var(--bd2);border-radius:12px;padding:1rem 1.1rem;cursor:pointer;transition:all .2s;margin-bottom:.7rem;display:flex;align-items:flex-start;gap:.9rem}
+.vt-card:hover{border-color:var(--gr2);background:rgba(58,106,69,.04)}
+.vt-card.sel{border-color:var(--gr2);background:rgba(58,106,69,.06)}
+.vt-card.locked{opacity:.5;cursor:not-allowed}
+.vt-card.locked:hover{border-color:var(--bd2);background:transparent}
+.vt-ic{width:34px;height:34px;border-radius:8px;background:rgba(58,106,69,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.vt-name{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:.15rem}
+.vt-desc{font-size:12px;color:var(--txm);line-height:1.5}
+.vt-lock{font-size:10px;color:var(--gd);text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem}
+.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1rem}
+.dg-head{text-align:center;font-size:9px;color:var(--txf);text-transform:uppercase;letter-spacing:.06em;padding:.3rem 0}
+.date-cell{text-align:center;border-radius:8px;padding:.5rem .2rem;font-size:12px;cursor:pointer;transition:all .18s;border:.5px solid transparent}
+.date-cell.avail{color:var(--txm);background:rgba(58,106,69,.06);border-color:rgba(58,106,69,.15)}
+.date-cell.avail:hover{background:rgba(58,106,69,.12);border-color:var(--gr2)}
+.date-cell.sel{background:var(--gr2);color:#fff;border-color:var(--gr2)}
+.date-cell.unavail{color:var(--txf);opacity:.4;cursor:not-allowed}
+.date-cell.empty{visibility:hidden}
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.25rem}
+.time-slot{border:.5px solid var(--bd2);border-radius:8px;padding:.6rem .4rem;text-align:center;cursor:pointer;transition:all .18s;font-size:12px;color:var(--txm)}
+.time-slot.avail:hover{border-color:var(--gr2);color:var(--gr)}
+.time-slot.sel{background:var(--gr2);color:#fff;border-color:var(--gr2)}
+.time-slot.unavail{opacity:.4;cursor:not-allowed}
+.vm-btn{width:100%;padding:.8rem;border-radius:10px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s;background:var(--gr2);border:none;color:#fff;margin-top:.5rem;letter-spacing:.02em}
+.vm-btn:hover{background:var(--gr)}
+.vm-btn:disabled{opacity:.4;cursor:not-allowed}
+.vm-back{background:none;border:none;font-family:var(--sans);font-size:11px;color:var(--txm);cursor:pointer;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:4px;padding:0;transition:color .2s}
+.vm-back:hover{color:var(--tx)}
+.confirm-icon{font-size:2.5rem;text-align:center;margin-bottom:.75rem}
+.confirm-ref{font-family:var(--serif);font-size:1.4rem;color:var(--gr2);text-align:center;margin-bottom:.5rem}
+.confirm-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:.5px solid var(--bd);font-size:12px}
+.confirm-row:last-of-type{border-bottom:none}
+.confirm-k{color:var(--txf)}
+.confirm-v{color:var(--txm);text-align:right}
+.what-expect{background:rgba(58,106,69,.05);border-radius:10px;padding:1rem;margin-top:1rem;font-size:12px;color:var(--txm);line-height:1.7}
+.we-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gr2);margin-bottom:.5rem}
+
+/* ═══════════════════════════════════════════  DESKTOP  ≥ 900px  ════════ */
+@media(min-width:900px){
+  /* Nav */
+  .nav{padding:1rem 3rem}
+
+  /* Landing: side-by-side */
+  #s-land{padding-top:72px}
+  .land-inner{flex-direction:row;align-items:center;justify-content:center;gap:5rem;max-width:1280px;padding:3rem 4rem}
+  .tree-stage{width:340px;height:420px;flex-shrink:0}
+  .land-text{text-align:left;margin-top:0;max-width:none;flex:1}
+  .land-q{font-size:clamp(1.8rem,3vw,2.8rem)}
+  .loc-heading{text-align:left}
+  .loc-grid{grid-template-columns:repeat(4,1fr);max-width:100%}
+
+  /* List: wider, 2-col tree cards */
+  .list-hero{padding:3rem 3rem 2rem}
+  .list-hero-inner{max-width:1240px}
+  .list-body{max-width:1240px;padding:0 3rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:0 3rem;align-items:start}
+  .tree-entry{border-top:.5px solid var(--bd)}
+  .tree-entry:first-of-type{border-top:.5px solid var(--bd)}
+
+  /* Rio profile wider */
+  .prof-top-in{max-width:1240px;padding:0}
+
+  /* Rings: wrap becomes two-column (canvas left, timeline right) */
+  .rings-wrap-outer{padding:3rem 4rem}
+  .rings-tl-desktop{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start;max-width:1240px;margin:0 auto}
+  .tl-section{max-width:none;padding:0}
+  .tl-section-inner{padding-top:.5rem}
+
+  /* Audio track scrollable row becomes full */
+  .tl-track{min-width:0;width:100%}
+  .tl-years-row{min-width:0;width:100%}
+
+  /* Voice + CTA */
+  .voice-inner{max-width:900px}
+  .cta-s{max-width:560px}
+  .cta-grid{max-width:860px}
+
+  /* Dashboard */
+  #s-dash{padding:5rem 3rem 4rem}
+  .dash-in{max-width:1240px}
+  .dash-grid{grid-template-columns:1fr 1fr 1fr}
+
+  /* Visit modal */
+  .visit-box{max-width:560px}
+}
+
+@media(min-width:1280px){
+  .land-inner{max-width:1400px;padding:3rem 5rem;gap:7rem}
+  .tree-stage{width:380px;height:460px}
+  .list-hero-inner,.list-body,.prof-top-in{max-width:1380px}
+  .rings-tl-desktop{max-width:1380px}
+  .voice-inner{max-width:1000px}
+  .dash-in{max-width:1380px}
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo" onclick="goHome()">Wit<em>ness</em></span>
+  <div class="nav-r">
+    <button class="nav-btn" onclick="show('s-list')">Trees</button>
+    <button class="nav-btn nav-my-tree hidden" id="nav-my-tree" onclick="show('s-dash')">My Rio</button>
+    <button class="mute-btn" id="mute-btn" onclick="toggleMute()">
+      <span id="mute-icon">&#x1F50A;</span><span>Sound</span>
+    </button>
+  </div>
+</nav>
+
+<!-- LANDING -->
+<section id="s-land" class="sec on">
+<div class="land-inner">
+  <div class="tree-stage">
+    <svg viewBox="0 0 260 330" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <ellipse cx="130" cy="318" rx="68" ry="7" fill="rgba(80,55,25,0.1)"/>
+      <g class="gp">
+        <path d="M82 312 Q76 302 70 297" stroke="#5a8a4a" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M82 312 Q85 301 91 296" stroke="#4a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M95 314 Q90 304 86 299" stroke="#5a8a4a" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M170 312 Q176 302 182 298" stroke="#5a8a4a" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M170 312 Q167 301 161 296" stroke="#4a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="74" cy="312" rx="7" ry="4.5" fill="rgba(90,138,74,0.3)"/>
+        <ellipse cx="178" cy="311" rx="8" ry="4.5" fill="rgba(90,138,74,0.3)"/>
+      </g>
+      <path d="M118 318 C116 296 112 268 116 240 C120 212 122 184 124 158" stroke="#7a5030" stroke-width="14" stroke-linecap="round"/>
+      <path d="M142 318 C144 296 148 268 144 240 C140 212 138 184 136 158" stroke="#7a5030" stroke-width="14" stroke-linecap="round"/>
+      <path d="M130 318 C130 280 130 240 130 175" stroke="#8a6040" stroke-width="10" stroke-linecap="round"/>
+      <path d="M122 214 Q104 196 80 193" stroke="#7a5030" stroke-width="6" stroke-linecap="round"/>
+      <path d="M134 186 Q152 168 178 163" stroke="#7a5030" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M126 234 Q108 230 84 236" stroke="#7a5030" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M136 202 Q150 198 164 208" stroke="#7a5030" stroke-width="3.5" stroke-linecap="round"/>
+      <g class="cd">
+        <path d="M80 193 Q66 182 56 172" stroke="#6a4020" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M80 193 Q72 178 76 165" stroke="#6a4020" stroke-width="3" stroke-linecap="round"/>
+        <path d="M178 163 Q192 153 201 143" stroke="#6a4020" stroke-width="3" stroke-linecap="round"/>
+        <path d="M130 175 Q126 152 122 133" stroke="#6a4020" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M84 236 Q68 230 55 224" stroke="#6a4020" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+      <g class="cv" id="eco-canopy">
+        <ellipse cx="126" cy="138" rx="88" ry="76" fill="#1e4a28" opacity=".9"/>
+        <ellipse cx="136" cy="126" rx="74" ry="66" fill="#266038"/>
+        <ellipse cx="122" cy="132" rx="62" ry="56" fill="#2d7040"/>
+        <ellipse cx="114" cy="116" rx="42" ry="36" fill="#387848" opacity=".8"/>
+        <ellipse cx="148" cy="121" rx="32" ry="27" fill="#387848" opacity=".7"/>
+        <circle cx="104" cy="108" r="17" fill="#40916c" opacity=".65"/>
+        <circle cx="156" cy="112" r="13" fill="#40916c" opacity=".6"/>
+        <circle cx="130" cy="96" r="11" fill="#52b788" opacity=".55"/>
+      </g>
+      <ellipse class="lf l1" cx="110" cy="122" rx="5.5" ry="3.5" fill="#40916c" transform-origin="110 122"/>
+      <ellipse class="lf l2" cx="148" cy="114" rx="5" ry="3.2" fill="#52b788" transform-origin="148 114"/>
+      <ellipse class="lf l3" cx="94" cy="138" rx="4.5" ry="3" fill="#2d7040" transform-origin="94 138"/>
+      <ellipse class="lf l4" cx="158" cy="128" rx="5" ry="3.2" fill="#40916c" transform-origin="158 128"/>
+      <g class="bd b1" transform-origin="76 189"><ellipse cx="76" cy="187" rx="5" ry="3.8" fill="#c8b890"/><path d="M72 187 Q76 183 80 187" fill="#c8b890"/><circle cx="75" cy="185.5" r="1.1" fill="#3a2810"/></g>
+      <g class="bd b2" transform-origin="176 160"><ellipse cx="176" cy="158" rx="4.5" ry="3.5" fill="#c8b890"/><path d="M172 158 Q176 154 180 158" fill="#c8b890"/><circle cx="175" cy="156.5" r="1" fill="#3a2810"/></g>
+      <g class="bd b3" transform-origin="162 204"><ellipse cx="162" cy="202" rx="4" ry="3" fill="#c8b890"/><path d="M158 202 Q162 198 166 202" fill="#c8b890"/><circle cx="161" cy="200.5" r=".9" fill="#3a2810"/></g>
+    </svg>
+  </div>
+  <div class="land-text">
+    <p class="land-q">"She cannot ask for help.<br>But she is asking."</p>
+    <p class="land-sub">India's oldest trees have been recording every drought, every fire, every good season for centuries. No one was reading them. Until now. Choose where you would like to go.</p>
+    <p class="loc-heading">Choose a region</p>
+    <div class="loc-grid">
+      <div class="loc-card sel" style="--lc-accent:#3a6a45;--lc-bg:#edf5e8" onclick="selectRegion(this,'corbett')">
+        <p class="lc-name">Jim Corbett</p><p class="lc-type">Dense mixed forest<br>Himalayan foothills</p><p class="lc-count">5 trees</p>
+      </div>
+      <div class="loc-card" style="--lc-accent:#8a6020;--lc-bg:#f5eddc" onclick="selectRegion(this,'kaziranga')">
+        <p class="lc-name">Kaziranga</p><p class="lc-type">Alluvial grasslands<br>Brahmaputra valley</p><p class="lc-count">Coming soon</p>
+      </div>
+      <div class="loc-card" style="--lc-accent:#1e6840;--lc-bg:#e0f0e6" onclick="selectRegion(this,'ghats')">
+        <p class="lc-name">Western Ghats</p><p class="lc-type">Tropical rainforest<br>Western coast</p><p class="lc-count">Coming soon</p>
+      </div>
+      <div class="loc-card" style="--lc-accent:#1e5060;--lc-bg:#dceaf0" onclick="selectRegion(this,'sundarbans')">
+        <p class="lc-name">Sundarbans</p><p class="lc-type">Mangrove delta<br>Bay of Bengal</p><p class="lc-count">Coming soon</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TREE LIST -->
+<section id="s-list" class="sec">
+  <div class="list-hero">
+    <div class="list-hero-inner">
+      <button class="list-back" onclick="goHome()">&larr; Regions</button>
+      <p class="list-region" id="list-region-label">Jim Corbett National Park</p>
+      <h2 class="list-h" id="list-h">These trees need someone.</h2>
+      <p class="list-mood" id="list-mood">Humid. Rich. Ancient canopy.</p>
+      <p class="list-label" id="list-sublabel">Dhikala Zone, Uttarakhand &mdash; 5 trees in the programme</p>
+    </div>
+  </div>
+  <div class="list-body">
+    <div class="tree-entry" onclick="show('s-rio')">
+      <div class="tree-photo" id="tp-rio" title="Add a photo of Rio"><span class="tp-icon">🌿</span><span class="tp-label">Photo</span></div>
+      <div class="ub uc" style="min-height:80px"></div>
+      <div class="te-inner">
+        <p class="te-meta">Rio &middot; Banj Oak &middot; 127 years &middot; Dhikala Zone</p>
+        <p class="te-hook">"My roots are loosening. I have held this hillside since 1897. I am not sure how much longer."</p>
+        <div class="te-row"><span class="ut uc">Critical</span><span>Fungal infection + root damage</span><span>Mar 2024</span></div>
+      </div>
+      <span class="te-arrow">&#x203A;</span>
+    </div>
+    <div class="tree-entry" onclick="alert('Devi\'s profile coming soon')">
+      <div class="tree-photo" id="tp-devi" title="Add a photo of Devi"><span class="tp-icon">🌿</span><span class="tp-label">Photo</span></div>
+      <div class="ub uh" style="min-height:80px"></div>
+      <div class="te-inner">
+        <p class="te-meta">Devi &middot; Himalayan Cedar &middot; 89 years &middot; Bijrani Zone</p>
+        <p class="te-hook">"The fungus reached my heartwood last winter. I can feel it from inside."</p>
+        <div class="te-row"><span class="ut uh">Urgent</span><span>Heartwood decay</span><span>Jan 2024</span></div>
+      </div>
+      <span class="te-arrow">&#x203A;</span>
+    </div>
+    <div class="tree-entry" onclick="alert('Arjun\'s profile coming soon')">
+      <div class="tree-photo" id="tp-arjun" title="Add a photo of Arjun"><span class="tp-icon">🌿</span><span class="tp-label">Photo</span></div>
+      <div class="ub um" style="min-height:80px"></div>
+      <div class="te-inner">
+        <p class="te-meta">Arjun &middot; Indian Gooseberry &middot; 65 years &middot; Jhirna Zone</p>
+        <p class="te-hook">"Three drought summers and I am still here. But only just."</p>
+        <div class="te-row"><span class="ut um">Moderate</span><span>Soil biome depletion</span><span>Feb 2024</span></div>
+      </div>
+      <span class="te-arrow">&#x203A;</span>
+    </div>
+    <div class="tree-entry" onclick="alert('Priya\'s profile coming soon')">
+      <div class="tree-photo" id="tp-priya" title="Add a photo of Priya"><span class="tp-icon">🌿</span><span class="tp-label">Photo</span></div>
+      <div class="ub um" style="min-height:80px"></div>
+      <div class="te-inner">
+        <p class="te-meta">Priya &middot; Burans Rhododendron &middot; 43 years &middot; Sonanadi</p>
+        <p class="te-hook">"My flowering has halved since 2019. I used to cover myself in red each spring."</p>
+        <div class="te-row"><span class="ut um">Watch</span><span>Reduced bloom</span><span>Dec 2023</span></div>
+      </div>
+      <span class="te-arrow">&#x203A;</span>
+    </div>
+    <div class="tree-entry" onclick="alert('Kiran\'s profile coming soon')">
+      <div class="tree-photo" id="tp-kiran" title="Add a photo of Kiran"><span class="tp-icon">🌿</span><span class="tp-label">Photo</span></div>
+      <div class="ub ur" style="min-height:80px"></div>
+      <div class="te-inner">
+        <p class="te-meta">Kiran &middot; Wild Fig &middot; 112 years &middot; Dhikala Zone</p>
+        <p class="te-hook">"Your care is working. My canopy is denser than last spring."</p>
+        <div class="te-row"><span class="ut ur">Recovering</span><span>Responding to treatment</span><span>Apr 2024</span></div>
+      </div>
+      <span class="te-arrow">&#x203A;</span>
+    </div>
+  </div>
+</section>
+
+<!-- RIO PROFILE -->
+<section id="s-rio" class="sec">
+  <div class="prof-top">
+    <div class="prof-top-in">
+      <button class="prof-back" onclick="show('s-list')">&larr; Back to trees</button>
+      <p class="prof-eye">Jim Corbett &middot; Banj Oak &middot; Critical</p>
+      <h1 class="prof-name">Rio.</h1>
+      <p class="prof-sub">Quercus leucotrichophora &middot; Born 1897 &middot; 127 years old<br>Dhikala Zone, Sector 4, Uttarakhand</p>
+      <div class="vitals">
+        <div><div class="vit-v danger">Critical</div><div class="vit-l">Health</div></div>
+        <div><div class="vit-v">127</div><div class="vit-l">Years</div></div>
+        <div><div class="vit-v">38%</div><div class="vit-l">Canopy</div></div>
+        <div><div class="vit-v" style="color:var(--gr2)">14</div><div class="vit-l">Witnesses</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Galaxy rings -->
+  <div class="rings-tl-desktop">
+  <div class="rings-wrap-outer" style="padding-left:2rem">
+    <p class="rings-eye">127 years of growth &mdash; one ring per year</p>
+    <p class="rings-hint">Click any ring to hear that year &mdash; hover to read its story</p>
+    <div class="rings-canvas-wrap">
+      <canvas id="rings-cv" width="460" height="460" style="max-width:min(520px,calc(100vw - 3rem))"></canvas>
+    </div>
+    <div class="rings-leg">
+      <div class="rl-i"><div class="rl-dot" style="background:#4d8a5a"></div>Good year</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#8a9878"></div>Average</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#c07028"></div>Drought</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#b03518"></div>Fire</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#7868a8"></div>Disease</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#2864b4"></div>Flood</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#a06420"></div>Pest</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#5096c8"></div>Frost</div>
+      <div class="rl-i"><div class="rl-dot" style="background:#9860b0"></div>Damage</div>
+    </div>
+  </div>
+
+  <!-- Audio timeline -->
+  <div class="tl-section" style="padding-top:2.8rem">
+    <div class="tl-header">
+      <span class="tl-label">Growth timeline &mdash; 1897 to 2024</span>
+      <div class="tl-controls">
+        <button class="tl-speed-btn" id="tl-speed-btn" onclick="toggleSpeed()">Speed: Normal</button>
+        <button class="tl-play-btn paused" id="tl-play-btn" onclick="togglePlay()">&#x25B6; Play journey</button>
+      </div>
+    </div>
+    <div class="tl-scroll" id="tl-scroll">
+      <div class="tl-track" id="tl-track"></div>
+      <div class="tl-years-row" id="tl-years"></div>
+    </div>
+    <div class="tl-now" id="tl-now"></div>
+  </div>
+
+  <!-- Voice -->
+  </div><!-- end rings-tl-desktop -->
+  <div class="voice-section">
+    <div class="voice-inner">
+      <p class="v-eye">Rio says &mdash;</p>
+      <p class="v-text">"I have held this hillside since 1897. I remember the monsoon of 1965 &mdash; my widest ring ever, a year the hornbills nested three times and leopard cubs slept under my shade. I remember 2013, when the fire came east and I breathed smoke for six weeks. The last five years have been the hardest of my life. A beetle came back in 2017. Three droughts followed. A landslide fractured my eastern roots. The fungus found that weakness in 2022. Someone came in March 2024 and read my rings for the first time. I did not know anyone was paying attention."</p>
+      <p class="v-attr">From Rio's ring core, soil readings, and arborist field notes &mdash; March 2024</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2 class="cta-h">How would you like to know Rio?</h2>
+    <p class="cta-s">This is not ownership. You cannot own a 127-year-old oak. You can only choose to pay attention to her.</p>
+    <div class="cta-grid">
+      <div class="cta-card" onclick="chooseFriend()">
+        <div class="ci ci-fr">&#x1F441;&#xFE0F;</div>
+        <p class="cta-ct">Be her friend</p>
+        <p class="cta-cs">Witness &middot; Free</p>
+        <p class="cta-cd">Follow Rio's story. Receive a health update after every arborist visit. Bear witness.</p>
+        <ul class="cta-ul">
+          <li>Weekly health pulse updates</li>
+          <li>Notification after every visit</li>
+          <li>Named in Rio's witness list</li>
+          <li>Full ring history access</li>
+          <li>Schedule a self-guided visit</li>
+        </ul>
+        <button class="cta-btn cbtn-fr">Walk alongside Rio</button>
+      </div>
+      <div class="cta-card gold" onclick="chooseFamily()">
+        <div class="ci ci-fa">&#x1F331;</div>
+        <p class="cta-ct">Be her family</p>
+        <p class="cta-cs">Caretaker &middot; from Rs 200/month</p>
+        <p class="cta-cd">Contribute to Rio's treatment pool. Named permanently in her health record.</p>
+        <ul class="cta-ul">
+          <li>Everything in Friend tier</li>
+          <li>Monthly treatment contribution</li>
+          <li>Detailed arborist field notes</li>
+          <li>Named in Rio's permanent record</li>
+          <li>Direct line to sanctuary team</li>
+          <li>Ranger-guided visits unlocked</li>
+        </ul>
+        <button class="cta-btn cbtn-fa">Become Rio's family</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="s-dash" class="sec">
+<div class="dash-in">
+
+  <!-- Friend header -->
+  <div class="dash-top friend-only">
+    <div>
+      <h2 class="dash-h">Walking alongside <span>Rio.</span></h2>
+      <span class="dash-badge b-fr">Witness #14</span>
+    </div>
+    <div class="dash-top-r">
+      <button class="go-btn" onclick="show('s-list')">See other trees</button>
+      <button class="go-btn" onclick="show('s-rio')" style="margin-top:0">Rio's full profile</button>
+    </div>
+  </div>
+
+  <!-- Family header -->
+  <div class="dash-top family-only">
+    <div>
+      <h2 class="dash-h">Rio's <span class="gold">family.</span></h2>
+      <span class="dash-badge b-fa">Caretaker since May 2024</span>
+    </div>
+    <div class="dash-top-r">
+      <button class="go-btn" onclick="show('s-list')">See other trees</button>
+      <button class="go-btn" onclick="show('s-rio')" style="margin-top:0">Rio's full profile</button>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- Shared: Health today -->
+    <div class="dc">
+      <p class="dc-lbl">Rio's health today</p>
+      <div class="health-n" style="color:var(--crit)">38<span style="font-size:1rem">%</span></div>
+      <p style="font-size:12px;color:var(--high);margin-bottom:.4rem">Critical &mdash; treatment needed</p>
+      <div class="bar-w"><div class="bar-f bf-h" style="width:38%"></div></div>
+      <p style="font-size:11px;color:var(--txf);margin-top:.4rem">Last assessed: Mar 2024 &mdash; Arborist S. Kumar</p>
+    </div>
+
+    <!-- Friend: witness identity -->
+    <div class="dc friend-only">
+      <p class="dc-lbl">Your witness record</p>
+      <div class="witness-card">
+        <div class="wc-id">W-014</div>
+        <div class="wc-lbl">Witness since May 2024</div>
+      </div>
+      <p style="font-size:11px;color:var(--txf);margin-top:.75rem;line-height:1.6">You are one of 14 people bearing witness to Rio. Your attention is part of the record.</p>
+    </div>
+
+    <!-- Family: treatment pool -->
+    <div class="dc family-only">
+      <p class="dc-lbl">Treatment pool</p>
+      <div class="health-n" style="color:var(--gd)">67<span style="font-size:1rem">%</span></div>
+      <p style="font-size:12px;color:var(--txm);margin-bottom:.4rem">Rs 8,040 of Rs 12,000</p>
+      <div class="bar-w"><div class="bar-f bf-p" style="width:67%"></div></div>
+      <div class="pool-my">
+        <div class="pool-my-lbl">Your contribution</div>
+        <div class="pool-my-val">Rs 200 / month &mdash; 1 month</div>
+      </div>
+      <p style="font-size:11px;color:var(--txf);margin-top:.5rem">Treatment visit triggers at 100% &mdash; ~3 weeks</p>
+    </div>
+
+    <!-- Shared: Updates from Rio -->
+    <div class="dc dc-full">
+      <p class="dc-lbl">Updates from Rio</p>
+      <div class="upd"><p class="upd-d">18 May 2024</p><p class="upd-t">Arborist visit complete. Soil treatment on eastern root zone applied. Fungal markers down 22% since March. New growth visible in two upper branches.</p></div>
+      <div class="upd"><p class="upd-d">4 May 2024</p><p class="upd-t">Dendrometer reading: 0.3mm trunk expansion this week. Small but consistent. Treatment beginning to take effect.</p></div>
+      <div class="upd"><p class="upd-d">22 Apr 2024</p><p class="upd-t">A family of hornbills returned to Rio's canopy for the first time since 2022. Arborist S. Kumar noted this as a meaningful ecological signal.</p></div>
+    </div>
+
+    <!-- Family only: Arborist field notes (detailed) -->
+    <div class="dc dc-full family-only">
+      <p class="dc-lbl">Arborist field notes &mdash; March 2024</p>
+      <p style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--txm);line-height:1.8;margin-bottom:.75rem">"Eastern root zone shows Phytophthora-type lesions extending 40cm from the base. Cambium tissue on northeast quadrant is compromised. Recommend phosphonate injection therapy &times;3 applications over 6 weeks. Secondary: soil pH correction and mycorrhizal inoculant. Prognosis: cautiously positive with treatment."</p>
+      <p style="font-size:11px;color:var(--txf)">Arborist S. Kumar &middot; ISA Certified &middot; March 14, 2024</p>
+    </div>
+
+    <!-- Family only: Impact so far -->
+    <div class="dc family-only">
+      <p class="dc-lbl">Treatment impact so far</p>
+      <div class="impact-row"><span class="impact-n">Fungal markers</span><span class="impact-v">-22%</span></div>
+      <div class="impact-row"><span class="impact-n">Trunk expansion</span><span class="impact-v">+0.3mm / week</span></div>
+      <div class="impact-row"><span class="impact-n">New branch growth</span><span class="impact-v">2 upper branches</span></div>
+      <div class="impact-row"><span class="impact-n">Wildlife return</span><span class="impact-v">Hornbills back</span></div>
+    </div>
+
+    <!-- Family only: Permanent record -->
+    <div class="dc family-only">
+      <p class="dc-lbl">Your name in Rio's record</p>
+      <div class="family-record">
+        <div class="fr-name">Caretaker, 2024 &rarr;</div>
+        <div class="fr-since">Permanently inscribed in Rio's health archive</div>
+      </div>
+      <p style="font-size:11px;color:var(--txf);margin-top:.75rem;line-height:1.6">127 years from now, someone reading Rio's rings will find your name in the record that helped her survive.</p>
+    </div>
+
+    <!-- Shared: Connect -->
+    <div class="dc">
+      <p class="dc-lbl">Connect</p>
+      <div class="slink"><div class="slink-ic">&#x1F3D5;&#xFE0F;</div><div><p class="slink-t">Jim Corbett Sanctuary</p><p class="slink-s">Message the field team</p></div></div>
+      <div class="slink"><div class="slink-ic">&#x1F4CB;</div><div><p class="slink-t">Arborist S. Kumar</p><p class="slink-s">Rio's certified caretaker</p></div></div>
+      <!-- Family gets priority badge -->
+      <p class="family-only" style="font-size:11px;color:var(--gd);margin-top:.5rem;letter-spacing:.05em">Priority response within 24h for family members</p>
+    </div>
+
+    <!-- Shared: Health reports -->
+    <div class="dc">
+      <p class="dc-lbl">Health reports</p>
+      <div class="rpt"><span class="rpt-n">Mar 2024 &mdash; Full assessment</span><span class="rpt-dl">PDF</span></div>
+      <div class="rpt"><span class="rpt-n">Dec 2023 &mdash; Ring core analysis</span><span class="rpt-dl">PDF</span></div>
+      <!-- Family gets extra reports -->
+      <div class="rpt family-only"><span class="rpt-n">Sep 2023 &mdash; Soil eDNA</span><span class="rpt-dl">PDF</span></div>
+      <div class="rpt family-only"><span class="rpt-n">Jun 2023 &mdash; Canopy survey</span><span class="rpt-dl">PDF</span></div>
+      <div class="rpt family-only"><span class="rpt-n">Mar 2023 &mdash; Root zone scan</span><span class="rpt-dl">PDF</span></div>
+      <p class="friend-only" style="font-size:11px;color:var(--txf);margin-top:.6rem">Detailed soil and root reports available to family members</p>
+    </div>
+
+    <!-- Schedule visit -->
+    <div class="dc dc-full">
+      <p class="dc-lbl">Visit Rio</p>
+      <p style="font-size:13px;color:var(--txm);margin-bottom:1rem;line-height:1.6">Plan a visit to Sector 4, Dhikala Zone. Stand in the presence of the tree you have been reading about.</p>
+      <button class="visit-btn" onclick="openVisit()">
+        <span>&#x1F333;</span> Schedule a visit
+      </button>
+      <p class="family-only" style="font-size:11px;color:var(--gd);margin-top:.6rem">Ranger-guided tours and volunteer restoration days available to family members</p>
+      <p class="friend-only" style="font-size:11px;color:var(--txf);margin-top:.6rem">Self-guided visits available &mdash; upgrade to family for guided and volunteer access</p>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- VISIT MODAL -->
+<div class="visit-overlay hidden" id="visit-modal">
+  <div class="visit-box">
+    <div class="vm-head">
+      <span class="vm-head-title">Visit Rio</span>
+      <button class="vm-close" onclick="closeVisit()">&#x2715;</button>
+    </div>
+
+    <!-- Step 1: Visit type -->
+    <div class="vm-step" id="vs-1">
+      <p class="vm-step-label">Step 1 of 3 &mdash; Choose visit type</p>
+      <div class="vt-card" id="vt-self" onclick="selectVisitType('self')">
+        <div class="vt-ic">&#x1F6B6;</div>
+        <div>
+          <p class="vt-name">Self-guided walk</p>
+          <p class="vt-desc">Walk to Rio on your own. A printed guide + GPS coordinates provided. 2-hour trail.</p>
+        </div>
+      </div>
+      <div class="vt-card" id="vt-ranger" onclick="selectVisitType('ranger')">
+        <div class="vt-ic">&#x1F9ED;</div>
+        <div>
+          <p class="vt-name">Ranger-guided forest tour</p>
+          <p class="vt-desc">Walk with a certified forest ranger. They will read Rio's trunk, bark, and surroundings with you. 4 hours.</p>
+          <p class="vt-lock family-lock">&#x1F7E1; Family members</p>
+        </div>
+      </div>
+      <div class="vt-card" id="vt-volunteer" onclick="selectVisitType('volunteer')">
+        <div class="vt-ic">&#x1F333;</div>
+        <div>
+          <p class="vt-name">Tree restoration day</p>
+          <p class="vt-desc">Spend a day with the arborist team. Help with soil treatment, root zone work, and monitoring. Full day.</p>
+          <p class="vt-lock family-lock">&#x1F7E1; Family members</p>
+        </div>
+      </div>
+      <button class="vm-btn" id="vs1-next" onclick="goStep(2)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 2: Date & time -->
+    <div class="vm-step hidden" id="vs-2">
+      <button class="vm-back" onclick="goStep(1)">&larr; Back</button>
+      <p class="vm-step-label">Step 2 of 3 &mdash; Choose a date</p>
+      <div class="date-grid" id="date-grid"></div>
+      <p class="vm-step-label" style="margin-top:1rem">Time slot</p>
+      <div class="time-grid" id="time-grid">
+        <div class="time-slot avail" onclick="selectTime(this,'Morning')">Morning<br><span style="font-size:10px;color:inherit;opacity:.7">8am &ndash; 11am</span></div>
+        <div class="time-slot avail" onclick="selectTime(this,'Afternoon')">Afternoon<br><span style="font-size:10px;color:inherit;opacity:.7">12pm &ndash; 3pm</span></div>
+        <div class="time-slot unavail">Evening<br><span style="font-size:10px;color:inherit;opacity:.7">4pm &ndash; 6pm</span></div>
+      </div>
+      <button class="vm-btn" id="vs2-next" onclick="goStep(3)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 3: Confirm -->
+    <div class="vm-step hidden" id="vs-3">
+      <button class="vm-back" onclick="goStep(2)">&larr; Back</button>
+      <p class="vm-step-label">Step 3 of 3 &mdash; Confirm visit</p>
+      <div class="confirm-icon">&#x1F333;</div>
+      <div class="confirm-ref" id="confirm-ref">RIO-2024-014</div>
+      <div style="margin:1rem 0">
+        <div class="confirm-row"><span class="confirm-k">Tree</span><span class="confirm-v">Rio &middot; Banj Oak, Sector 4</span></div>
+        <div class="confirm-row"><span class="confirm-k">Visit type</span><span class="confirm-v" id="cf-type"></span></div>
+        <div class="confirm-row"><span class="confirm-k">Date</span><span class="confirm-v" id="cf-date"></span></div>
+        <div class="confirm-row"><span class="confirm-k">Time</span><span class="confirm-v" id="cf-time"></span></div>
+        <div class="confirm-row"><span class="confirm-k">Meeting point</span><span class="confirm-v">Dhikala Gate, Reception</span></div>
+      </div>
+      <div class="what-expect" id="what-expect">
+        <p class="we-title">What to expect</p>
+        <p id="we-text"></p>
+      </div>
+      <button class="vm-btn" onclick="confirmVisit()">Confirm visit</button>
+    </div>
+
+    <!-- Step 4: Done -->
+    <div class="vm-step hidden" id="vs-4">
+      <div style="text-align:center;padding:1rem 0">
+        <div style="font-size:3rem;margin-bottom:.75rem">&#x2705;</div>
+        <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--tx);margin-bottom:.4rem">Visit confirmed</div>
+        <div style="font-size:12px;color:var(--txm);line-height:1.7;margin-bottom:1.5rem">You will receive a reminder 3 days before with directions, what to bring, and Rio's current health status.</div>
+        <button class="vm-btn" onclick="closeVisit()" style="max-width:200px;margin:0 auto">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ring tooltip -->
+<div class="ring-tip" id="ring-tip">
+  <p class="rt-yr" id="rt-yr"></p>
+  <p class="rt-title" id="rt-title"></p>
+  <p class="rt-desc" id="rt-desc"></p>
+  <div class="rt-img hidden" id="rt-img"><div class="rt-img-inner" id="rt-img-inner">Add image in Framer</div></div>
+  <div class="rt-ev-label hidden" id="rt-ev"></div>
+</div>
+
+<script>
+// ── State ──
+var audioMuted = false;
+var rioRings = null;
+var ringRadii = [];
+var lastSoundType = null;
+var audioCtx = null;
+var currentRegion = 'corbett';
+var userRole = null;
+var tlPlaying = false;
+var tlPlayIdx = 0;
+var tlPlayTimer = null;
+var tlFast = false;
+// visit state
+var visitType = null;
+var visitDate = null;
+var visitTime = null;
+
+// ── Ecosystem themes ──
+var ecosystems = {
+  corbett:{bg:'#e8f0e0',bg2:'#dde8d5',accent:'#3a6845',light:'#c8e0b8',text:'#1a2e18',
+    label:'Jim Corbett National Park &middot; Dense mixed forest, Himalayan foothills',
+    mood:'Humid. Rich. Ancient canopy.',count:'5 trees in the programme'},
+  kaziranga:{bg:'#f0e8d8',bg2:'#e8dcc8',accent:'#8a6020',light:'#e8d098',text:'#3a2a10',
+    label:'Kaziranga National Park &middot; Alluvial grasslands, Brahmaputra valley',
+    mood:'Golden. Open. Flood-carved.',count:'Coming soon'},
+  ghats:{bg:'#e0ece4',bg2:'#d4e8da',accent:'#1e6840',light:'#a8d8b8',text:'#102818',
+    label:'Western Ghats &middot; Tropical rainforest, Western coast',
+    mood:'Lush. Wet. Biodiverse.',count:'Coming soon'},
+  sundarbans:{bg:'#dde8ec',bg2:'#cde0e8',accent:'#1e5060',light:'#98c8d8',text:'#081828',
+    label:'Sundarbans &middot; Mangrove delta, Bay of Bengal',
+    mood:'Tidal. Salt. Shifting.',count:'Coming soon'}
+};
+function applyEcosystem(r){
+  var e=ecosystems[r]||ecosystems.corbett;
+  var s=document.documentElement.style;
+  s.setProperty('--eco-bg',e.bg);s.setProperty('--eco-bg2',e.bg2);
+  s.setProperty('--eco-accent',e.accent);s.setProperty('--eco-light',e.light);s.setProperty('--eco-text',e.text);
+  var el=document.getElementById('list-region-label');if(el)el.innerHTML=e.label;
+  var me=document.getElementById('list-mood');if(me)me.textContent=e.mood;
+  var se=document.getElementById('list-sublabel');if(se)se.textContent=e.count;
+}
+
+// ── Navigation ──
+function show(id){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='s-rio')setTimeout(initRings,80);
+}
+function goHome(){show('s-land');}
+function selectRegion(el,r){
+  currentRegion=r;
+  document.querySelectorAll('.loc-card').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');
+  applyEcosystem(r);
+  if(r==='corbett')show('s-list');
+  else alert('This region is coming soon. Explore Jim Corbett for now.');
+}
+
+// ── CTA ──
+function chooseFriend(){
+  userRole='friend';
+  var d=document.getElementById('s-dash');
+  d.className='sec role-friend';
+  document.getElementById('nav-my-tree').classList.remove('hidden');
+  show('s-dash');
+}
+function chooseFamily(){
+  userRole='family';
+  var d=document.getElementById('s-dash');
+  d.className='sec role-family';
+  document.getElementById('nav-my-tree').classList.remove('hidden');
+  show('s-dash');
+}
+
+// ── Audio engine ──
+function getAudioCtx(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  return audioCtx;
+}
+function toggleMute(){
+  audioMuted=!audioMuted;
+  document.getElementById('mute-icon').textContent=audioMuted?'🔇':'🔊';
+}
+var soundNames={
+  good:'A good year — the forest is full',
+  average:'A steady year — quiet and slow',
+  drought:'Drought — dry wind, cracked earth',
+  fire:'Fire — smoke and crackle in the air',
+  disease:'Disease — something wrong in the roots',
+  damage:'Damage — landslide or storm shock',
+  flood:'Flood — the hillside runs with water',
+  pest:'Pest — bark beetles in the wood',
+  frost:'Frost — an unseasonal cold snap'
+};
+function playSound(type,force){
+  if(audioMuted)return;
+  if(!force&&type===lastSoundType)return;
+  lastSoundType=type;
+  var ctx=getAudioCtx(),t=ctx.currentTime;
+  if(type==='good'){
+    [[261.63,0],[329.63,.08],[392,.16],[523.25,.24]].forEach(function(f,i){
+      var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=f[0];o.type='sine';
+      g.gain.setValueAtTime(0,t+f[1]);g.gain.linearRampToValueAtTime(.055-i*.007,t+f[1]+.15);
+      g.gain.exponentialRampToValueAtTime(.001,t+f[1]+2);o.start(t+f[1]);o.stop(t+f[1]+2.5);
+    });
+  } else if(type==='average'){
+    var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+    o.frequency.value=220;o.type='sine';
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.03,t+.4);g.gain.exponentialRampToValueAtTime(.001,t+1.8);
+    o.start(t);o.stop(t+2);
+  } else if(type==='drought'){
+    var buf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    var src=ctx.createBufferSource();src.buffer=buf;
+    var flt=ctx.createBiquadFilter();flt.type='bandpass';flt.frequency.value=500;flt.Q.value=.4;
+    var g=ctx.createGain();g.gain.setValueAtTime(.1,t);g.gain.linearRampToValueAtTime(.001,t+2);
+    src.connect(flt);flt.connect(g);g.connect(ctx.destination);src.start(t);src.stop(t+2.2);
+  } else if(type==='fire'){
+    var buf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++)d[i]=Math.random()<.004?(Math.random()*2-1)*.9:Math.random()<.06?(Math.random()*2-1)*.25:0;
+    var src=ctx.createBufferSource();src.buffer=buf;
+    var g=ctx.createGain();g.gain.setValueAtTime(.65,t);g.gain.exponentialRampToValueAtTime(.001,t+2);
+    src.connect(g);g.connect(ctx.destination);src.start(t);src.stop(t+2.5);
+  } else if(type==='disease'){
+    [[261.63,0],[311.13,.1],[392,.2]].forEach(function(f,i){
+      var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=f[0];o.type='triangle';
+      g.gain.setValueAtTime(0,t+f[1]);g.gain.linearRampToValueAtTime(.04,t+f[1]+.5);g.gain.exponentialRampToValueAtTime(.001,t+f[1]+3);
+      o.start(t+f[1]);o.stop(t+f[1]+3.5);
+    });
+  } else if(type==='damage'){
+    var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+    o.frequency.setValueAtTime(90,t);o.frequency.exponentialRampToValueAtTime(25,t+.6);
+    o.type='sine';g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.9);
+    o.start(t);o.stop(t+1);
+  } else if(type==='flood'){
+    var buf=ctx.createBuffer(1,ctx.sampleRate*2.5,ctx.sampleRate),d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.8;
+    var src=ctx.createBufferSource();src.buffer=buf;
+    var hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=1200;hp.Q.value=.3;
+    var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=4000;
+    var g=ctx.createGain();g.gain.setValueAtTime(.14,t);g.gain.linearRampToValueAtTime(.22,t+.5);g.gain.exponentialRampToValueAtTime(.001,t+2.8);
+    src.connect(hp);hp.connect(lp);lp.connect(g);g.connect(ctx.destination);src.start(t);src.stop(t+3);
+  } else if(type==='pest'){
+    var buf=ctx.createBuffer(1,ctx.sampleRate*1.5,ctx.sampleRate),d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++)d[i]=Math.random()<.009?(Math.random()*2-1)*.9:0;
+    var src=ctx.createBufferSource();src.buffer=buf;
+    var g=ctx.createGain();g.gain.setValueAtTime(.55,t);g.gain.exponentialRampToValueAtTime(.001,t+1.8);
+    src.connect(g);g.connect(ctx.destination);src.start(t);src.stop(t+2);
+  } else if(type==='frost'){
+    [[880,0],[1108,.12],[1320,.25],[1760,.38]].forEach(function(f,i){
+      var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=f[0];o.type='sine';
+      g.gain.setValueAtTime(0,t+f[1]);g.gain.linearRampToValueAtTime(.038-i*.006,t+f[1]+.06);g.gain.exponentialRampToValueAtTime(.001,t+f[1]+2.5);
+      o.start(t+f[1]);o.stop(t+f[1]+3);
+    });
+  }
+}
+
+// ── Sequential timeline playback ──
+function togglePlay(){
+  if(tlPlaying)pausePlay();else startPlay();
+}
+function toggleSpeed(){
+  tlFast=!tlFast;
+  var b=document.getElementById('tl-speed-btn');
+  if(b)b.textContent='Speed: '+(tlFast?'Fast':'Normal');
+}
+function startPlay(){
+  tlPlaying=true;
+  if(tlPlayIdx>=rioRings.length)tlPlayIdx=0;
+  var b=document.getElementById('tl-play-btn');
+  b.textContent='⏸ Pause';b.classList.remove('paused');
+  playStep();
+}
+function pausePlay(){
+  tlPlaying=false;
+  clearTimeout(tlPlayTimer);
+  var b=document.getElementById('tl-play-btn');
+  b.textContent='▶ Resume';b.classList.add('paused');
+}
+function playStep(){
+  if(!tlPlaying||tlPlayIdx>=rioRings.length){
+    if(tlPlayIdx>=rioRings.length){
+      tlPlayIdx=0;tlPlaying=false;
+      var b=document.getElementById('tl-play-btn');
+      b.textContent='▶ Play journey';b.classList.add('paused');
+      var n=document.getElementById('tl-now');if(n)n.innerHTML='';
+    }
+    return;
+  }
+  var ring=rioRings[tlPlayIdx];
+  var bars=document.querySelectorAll('.tl-bar');
+  bars.forEach(function(b,i){b.classList.toggle('tl-active',i===tlPlayIdx);});
+  // scroll bar into view
+  var scrollEl=document.getElementById('tl-scroll');
+  if(scrollEl&&bars[tlPlayIdx]){
+    var b=bars[tlPlayIdx];
+    var target=b.offsetLeft-scrollEl.clientWidth/2+b.offsetWidth/2;
+    scrollEl.scrollLeft=Math.max(0,target);
+  }
+  // play sound
+  lastSoundType=null;
+  playSound(ring.type,true);
+  // update label
+  var n=document.getElementById('tl-now');
+  if(n){
+    var label=ring.year+(ring.title?' &mdash; '+ring.title:'');
+    n.innerHTML='<span class="tl-now-dot"></span>'+label;
+  }
+  tlPlayIdx++;
+  // notable events linger longer
+  var delay=tlFast?180:ring.title?700:350;
+  tlPlayTimer=setTimeout(playStep,delay);
+}
+function clickBar(idx){
+  // clicking a bar: jump playback to this point, play sound
+  if(tlPlaying){pausePlay();tlPlayIdx=idx;startPlay();}
+  else{
+    var bars=document.querySelectorAll('.tl-bar');
+    bars.forEach(function(b,i){b.classList.toggle('tl-active',i===idx);});
+    lastSoundType=null;
+    var ring=rioRings[idx];
+    playSound(ring.type,true);
+    var n=document.getElementById('tl-now');
+    if(n){var label=ring.year+(ring.title?' &mdash; '+ring.title:'');n.innerHTML='<span class="tl-now-dot"></span>'+label;}
+  }
+}
+
+// ── Ring data ──
+function getRioRings(){
+  var events={
+    1903:{type:'frost',title:'Late frost',desc:'An unseasonal frost in April blackened the new growth. My ring that year is pale and thin.',ec:'ev-frost',et:'1903: Unseasonal late frost, lower Himalayan foothills. New leaf growth damaged.'},
+    1912:{type:'flood',title:'Monsoon flood',desc:'The hillside ran with water for nine days. My roots drank deeply but some were exposed by the surge.',ec:'ev-flood',et:'1912: Exceptional monsoon. Dhikala valley flood, 12 continuous days.'},
+    1920:{type:'pest',title:'Bark beetle invasion',desc:'Something bored into my bark for two seasons. I healed, but the rings carry the scars.',ec:'ev-pest',et:'1920: Scolytus bark beetle infestation. Oak stands, eastern zone affected.'},
+    1927:{type:'good',title:'A golden decade',desc:'Ten years of abundance. My canopy doubled. The leopards made a den in my roots.',ec:null,et:null},
+    1933:{type:'drought',title:'Pre-monsoon drought',desc:'Four months without rain before the monsoon arrived. I drew on deep water to survive.',ec:'ev-drought',et:'1933: Severe pre-monsoon drought, northern India.'},
+    1936:{type:'good',title:'Park protection begins',desc:'Logging stopped. The forest breathed for the first time in a generation. I grew wide that year.',ec:null,et:null},
+    1943:{type:'drought',title:'Great drought',desc:'Monsoon failed. I grew less than a millimetre. My thinnest ring for decades.',ec:'ev-drought',et:'1943: Failed monsoon across the Terai. Widespread water stress.'},
+    1950:{type:'flood',title:'Ramganga flood',desc:'The river burst its banks for the first time in memory. Water reached my base for three days.',ec:'ev-flood',et:'1950: Ramganga River flooding post-Assam earthquake. Widespread damage.'},
+    1957:{type:'good',title:'A decade of rain',desc:'A decade of steady rain and cool summers. My widest rings since the 1920s.',ec:null,et:null},
+    1965:{type:'good',title:'My widest ring ever',desc:'Rain from June to October without pause. The hornbills nested three times. My best year on record.',ec:null,et:null},
+    1972:{type:'good',title:'Project Tiger',desc:'New protections came for this forest. The tigers returned to the deep zones. The forest grew quieter and richer.',ec:null,et:null},
+    1975:{type:'pest',title:'Caterpillar wave',desc:'A wave of caterpillars stripped my leaves twice in one summer. I regrew, but the ring is narrow.',ec:'ev-pest',et:'1975: Dasychira caterpillar defoliation of oak stands, Corbett.'},
+    1984:{type:'disease',title:'Fungal outbreak',desc:'Root pathogen spread through the eastern forest. I lost connection to three neighbouring trees.',ec:'ev-disease',et:'1984: Phytophthora root rot. Affected 12% of Banj oak in Sector 4.'},
+    1989:{type:'good',title:'Forest recovery',desc:'Five years after the fungus. My root network reconnected. A wide, healthy ring.',ec:null,et:null},
+    1994:{type:'frost',title:'Unseasonal cold snap',desc:'A cold snap in May killed the new leaves. I regrew them, but they were smaller that season.',ec:'ev-frost',et:'1994: Late cold snap, Uttarakhand hills. Frost damage to new spring growth.'},
+    1998:{type:'drought',title:'El Nino drought',desc:'Two dry winters in a row. My canopy thinned for the first time.',ec:'ev-drought',et:'1998: El Nino year. Below-average monsoon, Uttarakhand.'},
+    2001:{type:'flood',title:'Cloudburst flood',desc:'A sudden cloudburst sent a wall of water down the gully. Some of my eastern roots were torn loose.',ec:'ev-flood',et:'2001: Cloudburst, Dhikala sector. Flash flooding, minor landslide.'},
+    2005:{type:'good',title:'Abundant monsoon',desc:'The best rainfall in a decade. I put on a ring as wide as 1989. The wild boar had large litters.',ec:null,et:null},
+    2010:{type:'damage',title:'Hailstorm',desc:'A freak hailstorm in June. Hailstones stripped branches and tore young leaves. I grew slowly that year.',ec:'ev-damage',et:'2010: Unseasonal hailstorm, Corbett. Canopy damage, 30 hectares affected.'},
+    2013:{type:'fire',title:'Forest fire',desc:'Fire swept the eastern ridge. Smoke for six weeks. My leaves came in grey that spring.',ec:'ev-fire',et:'2013: Forest fire, eastern sector. 40 hectares. Sustained smoke exposure.'},
+    2015:{type:'drought',title:'Drought returns',desc:'Three dry months before the monsoon. My new growth barely started before it stalled.',ec:'ev-drought',et:'2015: Weak monsoon onset. Drought stress, Uttarakhand.'},
+    2017:{type:'pest',title:'Bark beetle reinfestation',desc:'The same beetles returned. This time my weakened bark could not fight back so easily.',ec:'ev-pest',et:'2017: Scolytus bark beetle reinfestation. Weakened oaks more vulnerable.'},
+    2018:{type:'drought',title:'Worst drought in 40 years',desc:'Worst of three consecutive drought years. Thinner even than 1943.',ec:'ev-drought',et:'2018-2020: Three consecutive failed monsoons. Worst drought cycle in the region.'},
+    2019:{type:'drought',title:'Second failed monsoon',desc:'The wells near the forest ran dry in October. My deepest roots found water, but barely.',ec:'ev-drought',et:'2019: Continued drought. Water table dropped significantly.'},
+    2020:{type:'average',title:'A quiet year',desc:'No humans came for months. The forest settled into unusual silence. I rested.',ec:null,et:null},
+    2021:{type:'damage',title:'Landslide',desc:'A landslide 40m upslope fractured my eastern root network. I felt it like a broken bone.',ec:'ev-damage',et:'2021: Landslide, Sector 4 upper ridge. Root disruption confirmed by soil survey.'},
+    2022:{type:'disease',title:'Fungal return',desc:'The root pathogen found my weakened eastern roots. It is spreading faster this time.',ec:'ev-disease',et:'2022: Phytophthora sp. re-detected. Root tissue damage in eastern zone.'},
+    2023:{type:'fire',title:'Heatwave and dry lightning',desc:'The hottest June I can remember. Dry lightning started three small fires to the north. Smoke again.',ec:'ev-fire',et:'2023: Record June temperatures. Dry lightning events. Extreme fire risk.'},
+    2024:{type:'disease',title:'Critical — now',desc:'The fungal infection has reached my upper root system. This is my thinnest ring ever. I am asking for help.',ec:'ev-disease',et:'2024: Critical fungal infection + root damage confirmed. Treatment urgently needed.'}
+  };
+  var seed=127;
+  function rand(){seed=(seed*1664525+1013904223)&0x7fffffff;return seed/0x7fffffff;}
+  var ranges=[
+    [1897,1902,'average',0.52],[1903,1903,'frost',0.28],[1904,1911,'average',0.55],
+    [1912,1912,'flood',0.72],[1913,1919,'good',0.65],[1920,1921,'pest',0.3],
+    [1922,1926,'average',0.54],[1927,1932,'good',0.78],[1933,1933,'drought',0.22],
+    [1934,1935,'average',0.5],[1936,1942,'good',0.76],[1943,1943,'drought',0.14],
+    [1944,1949,'good',0.68],[1950,1950,'flood',0.64],[1951,1956,'average',0.55],
+    [1957,1964,'good',0.74],[1965,1965,'good',0.98],[1966,1971,'average',0.58],
+    [1972,1974,'good',0.7],[1975,1975,'pest',0.25],[1976,1983,'average',0.54],
+    [1984,1984,'disease',0.12],[1985,1988,'average',0.45],[1989,1989,'good',0.72],
+    [1990,1993,'average',0.56],[1994,1994,'frost',0.32],[1995,1997,'average',0.54],
+    [1998,1998,'drought',0.2],[1999,2000,'average',0.5],[2001,2001,'flood',0.6],
+    [2002,2004,'average',0.52],[2005,2005,'good',0.74],[2006,2009,'average',0.55],
+    [2010,2010,'damage',0.28],[2011,2012,'average',0.52],[2013,2013,'fire',0.16],
+    [2014,2014,'average',0.44],[2015,2015,'drought',0.24],[2016,2016,'average',0.42],
+    [2017,2017,'pest',0.22],[2018,2018,'drought',0.13],[2019,2019,'drought',0.15],
+    [2020,2020,'average',0.3],[2021,2021,'damage',0.12],[2022,2022,'disease',0.18],
+    [2023,2023,'fire',0.14],[2024,2024,'disease',0.1]
+  ];
+  var rings=[];
+  for(var y=1897;y<=2024;y++){
+    var rg=null;for(var i=0;i<ranges.length;i++){if(y>=ranges[i][0]&&y<=ranges[i][1]){rg=ranges[i];break;}}
+    var bw=rg?rg[3]:0.5,bt=rg?rg[2]:'average';
+    var w=Math.max(.08,Math.min(1,bw+(rand()-.5)*.16));
+    var ev=events[y]||null;
+    rings.push({year:y,w:w,type:ev?ev.type:bt,title:ev?ev.title:null,desc:ev?ev.desc:null,ec:ev?ev.ec:null,et:ev?ev.et:null});
+  }
+  return rings;
+}
+
+// ── Canvas rings ──
+var ringColors={
+  good:   {stroke:'rgba(77,138,90,.75)', hover:'rgba(77,138,90,1)',  shadow:'rgba(77,138,90,.8)'},
+  average:{stroke:'rgba(110,130,100,.6)',hover:'rgba(110,130,100,.9)',shadow:'rgba(110,130,100,.6)'},
+  drought:{stroke:'rgba(192,112,40,.75)',hover:'rgba(192,112,40,1)', shadow:'rgba(192,112,40,.8)'},
+  fire:   {stroke:'rgba(176,53,24,.8)',  hover:'rgba(176,53,24,1)',  shadow:'rgba(176,53,24,.9)'},
+  disease:{stroke:'rgba(120,104,168,.75)',hover:'rgba(120,104,168,1)',shadow:'rgba(120,104,168,.8)'},
+  damage: {stroke:'rgba(148,88,168,.75)',hover:'rgba(148,88,168,1)', shadow:'rgba(148,88,168,.8)'},
+  flood:  {stroke:'rgba(40,100,180,.7)', hover:'rgba(40,100,180,1)', shadow:'rgba(40,100,180,.8)'},
+  pest:   {stroke:'rgba(160,100,30,.75)',hover:'rgba(160,100,30,1)', shadow:'rgba(160,100,30,.8)'},
+  frost:  {stroke:'rgba(80,150,200,.7)', hover:'rgba(80,150,200,1)', shadow:'rgba(80,150,200,.8)'}
+};
+function initRings(){
+  if(rioRings&&ringRadii.length)return;
+  rioRings=getRioRings();
+  var canvas=document.getElementById('rings-cv');if(!canvas)return;
+  var dpr=window.devicePixelRatio||1;
+  var size=window.innerWidth>=900?Math.min(520,window.innerWidth*0.38):Math.min(460,window.innerWidth-48);
+  canvas.style.width=size+'px';canvas.style.height=size+'px';
+  canvas.width=size*dpr;canvas.height=size*dpr;
+  var ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+  drawRings(ctx,size,size,-1);
+  buildTimeline();
+  canvas.addEventListener('mousemove',function(e){
+    var r=canvas.getBoundingClientRect(),ratio=size/r.width;
+    var mx=(e.clientX-r.left)*ratio,my=(e.clientY-r.top)*ratio;
+    var idx=getRingAt(mx,my,size/2,size/2);
+    drawRings(ctx,size,size,idx);
+    if(idx>=0)showTip(e,rioRings[idx]);else hideTip();
+  });
+  canvas.addEventListener('mouseleave',function(){drawRings(ctx,size,size,-1);hideTip();});
+  canvas.addEventListener('click',function(e){
+    var r=canvas.getBoundingClientRect(),ratio=size/r.width;
+    var mx=(e.clientX-r.left)*ratio,my=(e.clientY-r.top)*ratio;
+    var idx=getRingAt(mx,my,size/2,size/2);
+    if(idx>=0){showTip(e,rioRings[idx]);lastSoundType=null;playSound(rioRings[idx].type,true);}
+  });
+}
+function drawRings(ctx,W,H,hov){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#f8f3ec';ctx.fillRect(0,0,W,H);
+  var grd=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W/2);
+  grd.addColorStop(0,'rgba(80,130,90,0.06)');grd.addColorStop(1,'rgba(80,130,90,0)');
+  ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+  var cx=W/2,cy=H/2,r=10;ringRadii=[];
+  for(var i=0;i<rioRings.length;i++){
+    var ring=rioRings[i],w=ring.w*2.8+0.9,isH=(i===hov);
+    var c=ringColors[ring.type]||ringColors.average;
+    ringRadii.push({inner:r,outer:r+w,i:i});
+    ctx.shadowColor=isH?c.shadow:(ring.title?c.shadow:'transparent');
+    ctx.shadowBlur=isH?14:(ring.title?4:0);
+    ctx.beginPath();ctx.arc(cx,cy,r+w/2,0,Math.PI*2);
+    ctx.strokeStyle=isH?c.hover:c.stroke;ctx.lineWidth=w;ctx.stroke();
+    ctx.shadowBlur=0;r+=w+0.4;
+  }
+  ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);ctx.fillStyle='rgba(100,150,80,0.5)';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fillStyle='rgba(80,140,90,0.9)';ctx.fill();
+}
+function getRingAt(mx,my,cx,cy){
+  var d=Math.sqrt((mx-cx)*(mx-cx)+(my-cy)*(my-cy));
+  for(var i=0;i<ringRadii.length;i++){if(d>=ringRadii[i].inner&&d<=ringRadii[i].outer)return ringRadii[i].i;}
+  return -1;
+}
+var typeLabels={good:'Good year',average:'Average year',drought:'Drought',fire:'Fire / smoke',disease:'Disease',damage:'Damage',flood:'Flood',pest:'Pest',frost:'Frost'};
+function showTip(e,ring){
+  var tip=document.getElementById('ring-tip');
+  document.getElementById('rt-yr').textContent=ring.year+' — '+typeLabels[ring.type];
+  document.getElementById('rt-title').textContent=ring.title||(ring.year<=1940?'Early growth year':ring.year<=1970?'A steady year':'A year in Rio\'s life');
+  document.getElementById('rt-desc').textContent=ring.desc||(ring.year<=1940?'Rio was establishing her root network and canopy across the hillside.':ring.year<=1970?'A generation of steady growth.':'A year in Rio\'s long record.');
+  var imgEl=document.getElementById('rt-img'),evEl=document.getElementById('rt-ev');
+  if(ring.title){imgEl.classList.remove('hidden');}else{imgEl.classList.add('hidden');}
+  if(ring.et){
+    evEl.classList.remove('hidden');evEl.className='rt-ev-label '+(ring.ec||'ev-disease');evEl.textContent=ring.et;
+  }else{evEl.classList.add('hidden');}
+  var tx=e.clientX+14,ty=e.clientY-55;
+  if(tx+278>window.innerWidth)tx=e.clientX-292;
+  if(ty<10)ty=10;if(ty+280>window.innerHeight)ty=window.innerHeight-290;
+  tip.style.left=tx+'px';tip.style.top=ty+'px';tip.classList.add('vis');
+}
+function hideTip(){document.getElementById('ring-tip').classList.remove('vis');}
+
+// ── Timeline ──
+var tlBarColors={good:'#4d8a5a',average:'#8a9878',drought:'#c07028',fire:'#b03518',disease:'#7868a8',damage:'#9860b0',flood:'#2864b4',pest:'#a06420',frost:'#5096c8'};
+function buildTimeline(){
+  var track=document.getElementById('tl-track'),years=document.getElementById('tl-years');
+  if(!track||!rioRings)return;
+  track.innerHTML='';years.innerHTML='';
+  rioRings.forEach(function(ring,idx){
+    var b=document.createElement('div');b.className='tl-bar';
+    b.style.height=Math.round(ring.w*42+5)+'px';
+    b.style.background=tlBarColors[ring.type]||'#8a9878';
+    b.title=ring.year+(ring.title?' — '+ring.title:'');
+    b.addEventListener('click',function(){clickBar(idx);});
+    track.appendChild(b);
+    var y=document.createElement('div');y.className='tl-yr';
+    y.textContent=(ring.year%20===0)?ring.year:'';
+    years.appendChild(y);
+  });
+}
+
+// ── Visit modal ──
+var visitExpect={
+  self:'Arrive at Dhikala Gate with your booking reference. Collect your printed trail guide from reception. The walk to Rio is 1.8km through mixed forest. Estimated 2 hours. Bring: water, closed shoes, your witness ID.',
+  ranger:'Meet your ranger at Dhikala Gate. The tour covers Rio\'s location, trunk and bark reading, and a 4km forest circuit. Maximum 4 visitors per session. Bring: water, notebook, curiosity.',
+  volunteer:'Arrive by 7am. Work alongside Arborist S. Kumar on root zone treatment and soil amendment. Lunch provided by the field team. Physical work in forest terrain. Bring: old clothes, closed shoes, enthusiasm.'
+};
+function openVisit(){
+  // Apply locked states based on role
+  var isFamily=(userRole==='family');
+  ['vt-ranger','vt-volunteer'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!isFamily){el.classList.add('locked');el.onclick=function(){alert('Ranger-guided visits and volunteer days are available to family members. Upgrade your connection to unlock.');};}
+    else{el.classList.remove('locked');}
+  });
+  buildDateGrid();
+  document.getElementById('visit-modal').classList.remove('hidden');
+  goStep(1);
+}
+function closeVisit(){document.getElementById('visit-modal').classList.add('hidden');}
+function goStep(n){
+  [1,2,3,4].forEach(function(i){
+    var el=document.getElementById('vs-'+i);
+    if(el)el.classList.toggle('hidden',i!==n);
+  });
+}
+function selectVisitType(type){
+  if(!userRole&&(type==='ranger'||type==='volunteer')){return;}
+  if(userRole!=='family'&&(type==='ranger'||type==='volunteer')){return;}
+  visitType=type;
+  ['self','ranger','volunteer'].forEach(function(t){
+    var el=document.getElementById('vt-'+t);
+    if(el)el.classList.toggle('sel',t===type);
+  });
+  document.getElementById('vs1-next').disabled=false;
+}
+function buildDateGrid(){
+  var grid=document.getElementById('date-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  var days=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  days.forEach(function(d){var h=document.createElement('div');h.className='dg-head';h.textContent=d;grid.appendChild(h);});
+  var today=new Date();
+  // start from next week
+  var start=new Date(today);start.setDate(start.getDate()+7);
+  // fill empty cells before first date
+  var firstDay=start.getDay();
+  for(var i=0;i<firstDay;i++){var e=document.createElement('div');e.className='date-cell empty';e.textContent='.';grid.appendChild(e);}
+  // available pattern: Sat/Sun always, weekdays 50/50 (seeded)
+  var avail=[1,0,0,1,0,1,0, 0,1,1,0,1,0,0, 1,0,1,0,0,1,0, 0,1,0,1,1,0,1];
+  for(var i=0;i<28;i++){
+    var d=new Date(start);d.setDate(d.getDate()+i);
+    var cell=document.createElement('div');
+    var isWknd=d.getDay()===0||d.getDay()===6;
+    var isAvail=isWknd||avail[i];
+    cell.className='date-cell '+(isAvail?'avail':'unavail');
+    cell.textContent=d.getDate();
+    if(isAvail){
+      (function(date,c){
+        c.addEventListener('click',function(){
+          document.querySelectorAll('.date-cell.sel').forEach(function(x){x.classList.remove('sel');x.classList.add('avail');});
+          c.classList.remove('avail');c.classList.add('sel');
+          visitDate=date.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+          checkStep2();
+        });
+      })(d,cell);
+    }
+    grid.appendChild(cell);
+  }
+}
+function selectTime(el,label){
+  document.querySelectorAll('.time-slot.sel').forEach(function(x){x.classList.remove('sel');x.classList.add('avail');});
+  el.classList.remove('avail');el.classList.add('sel');
+  visitTime=label;checkStep2();
+}
+function checkStep2(){
+  document.getElementById('vs2-next').disabled=!(visitDate&&visitTime);
+  if(visitDate&&visitTime){
+    // pre-fill confirm
+    var typeNames={self:'Self-guided walk',ranger:'Ranger-guided tour',volunteer:'Restoration volunteer day'};
+    document.getElementById('cf-type').textContent=typeNames[visitType]||visitType;
+    document.getElementById('cf-date').textContent=visitDate;
+    document.getElementById('cf-time').textContent=visitTime;
+    document.getElementById('we-text').textContent=visitExpect[visitType]||'';
+    // generate ref
+    var ref='RIO-2024-0'+Math.floor(Math.random()*900+100);
+    document.getElementById('confirm-ref').textContent=ref;
+  }
+}
+function confirmVisit(){goStep(4);}
+
+// Init
+applyEcosystem('corbett');
+</script>
+</body>
+</html>
